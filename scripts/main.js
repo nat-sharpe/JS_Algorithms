@@ -50,50 +50,86 @@
 // };
 // console.log(caseConvert(['Happy', 'birthday', 'Bilbo', 'Baggins'], 'snake'));
 
-// Checks whether a number is a valid credit card and returns the type and validity
-var validateNum = function (numToCheck) {
-    var newStr = numToCheck;
-    var justNums = '';
-    var status = 'Invalid';
+// // Checks whether a number is a valid credit card and returns the type and validity
+// var validateNum = function (numToCheck) {
+//     var newStr = numToCheck;
+//     var justNums = '';
+//     var status = 'Invalid';
 
-    if (typeof numToCheck === 'number') {
-        newStr = numToCheck.toString();
-    }
+//     if (typeof numToCheck === 'number') {
+//         newStr = numToCheck.toString();
+//     }
 
-    for (var i = 0; i < newStr.length; i++) {
-        if (parseInt(newStr[i], 10) < 10) {
-            justNums += newStr[i];
-        }
-    };
+//     for (var i = 0; i < newStr.length; i++) {
+//         if (parseInt(newStr[i], 10) < 10) {
+//             justNums += newStr[i];
+//         }
+//     };
     
-    if (justNums.length < 15 || justNums.length > 16) {
-        return status;
+//     if (justNums.length < 15 || justNums.length > 16) {
+//         return status;
+//     }
+
+//     if (justNums.length === 16) {
+//         if (justNums[0] === '4') {
+//             status = 'Valid'
+//             return `${status} Visa`;
+//         }
+//         if (justNums.slice(0, 4) === '6011') {
+//             status = 'Valid'
+//             return `${status} Discovery Card`;
+//         }
+//         firstTwoNums = parseInt(justNums.slice(0, 2), 10);
+//         if (firstTwoNums > 49 && firstTwoNums < 56) {
+//             status = 'Valid'
+//             return `${status} MasterCard`;
+//         }
+//     }
+
+//     else {
+//         if (justNums.slice(0, 2) === '34' || justNums.slice(0, 2) === '37') {
+//             status = 'Valid'
+//             return `${status} American Express`;
+//         }
+//     }
+
+//     return status;
+// };
+
+// console.log(validateNum('3701-3443-1000-555'));
+
+var blueMoons = 0;
+var year = 2000;
+var moonCycle = 10.4
+var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+var monthCount = 0;
+var previousMonthCount = null;
+
+while (year < 2100) {
+    if (monthCount === previousMonthCount) {
+        blueMoons++;
     }
 
-    if (justNums.length === 16) {
-        if (justNums[0] === '4') {
-            status = 'Valid'
-            return `${status} Visa`;
-        }
-        if (justNums.slice(0, 4) === '6011') {
-            status = 'Valid'
-            return `${status} Discovery Card`;
-        }
-        firstTwoNums = parseInt(justNums.slice(0, 2), 10);
-        if (firstTwoNums > 49 && firstTwoNums < 56) {
-            status = 'Valid'
-            return `${status} MasterCard`;
+    moonCycle+= 29.5;
+
+    if (monthCount < 11) {
+        if ((moonCycle + 29.5) > (moonCycle + months[monthCount])) {
+            previousMonthCount = monthCount;
+            monthCount++;
         }
     }
-
     else {
-        if (justNums.slice(0, 2) === '34' || justNums.slice(0, 2) === '37') {
-            status = 'Valid'
-            return `${status} American Express`;
+        if ((moonCycle + 29.5) > (moonCycle + months[monthCount])) {
+            previousMonthCount = monthCount;
         }
+        year++;
+        monthCount = 0;
+       
     }
+    console.log(year);
+    console.log(moonCycle);
+    console.log(monthCount);
 
-    return status;
-};
+}
 
-console.log(validateNum('3701-3443-1000-555'));
+console.log(blueMoons);
