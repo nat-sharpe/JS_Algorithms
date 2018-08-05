@@ -118,6 +118,7 @@ while (year < 2100) {
             monthCount++;
         }
     }
+    
     else {
         if ((moonCycle + 29.5) > (moonCycle + months[monthCount])) {
             previousMonthCount = monthCount;
